@@ -4,12 +4,13 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Date;
 
 public class Employee extends Data {
 
 	private Data pribadiemployee;
 
-	private Tanggalmasuk employee;
+	private Date Tanggalmasuk;
 
 	private boolean isForeigner;
 	private boolean gender; // true = Laki-laki, false = Perempuan
