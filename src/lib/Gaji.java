@@ -1,6 +1,6 @@
 package lib;
 
-public class Gaji extends Data {
+public class Gaji extends Tanggal {
     private int monthlySalary;
 
     public int getMonthlySalary() {
