@@ -4,13 +4,12 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Date;
 
 public class Employee extends Data {
 
 	private Data pribadiemployee;
 
-	private Date Tanggalmasuk;
+	private Tanggalmasuk employee;
 
 	private boolean isForeigner;
 	private boolean gender; // true = Laki-laki, false = Perempuan
@@ -24,22 +23,14 @@ public class Employee extends Data {
 	private List<String> childIdNumbers;
 
 	public Employee(Data pribadiemployee,
-			Date Tanggalmasuk, boolean isForeigner, boolean gender) {
+			Tanggalmasuk employee, boolean isForeigner, boolean gender) {
 		this.setPribadiemployee(pribadiemployee);
-		this.setTanggalmasuk(Tanggalmasuk);
+		this.setEmployee(employee);
 		this.isForeigner = isForeigner;
 		this.gender = gender;
 
 		childNames = new LinkedList<String>();
 		childIdNumbers = new LinkedList<String>();
-	}
-
-	public Date getTanggalmasuk() {
-		return Tanggalmasuk;
-	}
-
-	public void setTanggalmasuk(Date tanggalmasuk) {
-		Tanggalmasuk = tanggalmasuk;
 	}
 
 	public Data getPribadiemployee() {
@@ -50,13 +41,22 @@ public class Employee extends Data {
 		this.pribadiemployee = pribadiemployee;
 	}
 
+	public Tanggalmasuk getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Tanggalmasuk employee) {
+		this.employee = employee;
+	}
+
 	/**
 	 * Fungsi untuk menentukan gaji bulanan pegawai berdasarkan grade kepegawaiannya
 	 * (grade 1: 3.000.000 per bulan, grade 2: 5.000.000 per bulan, grade 3:
 	 * 7.000.000 per bulan)
 	 * Jika pegawai adalah warga negara asing gaji bulanan diperbesar sebanyak 50%
 	 */
-	public void setMonthlySalary(int grade) {
+	public void setMonthlySalary(int grade, int monthlySalary) {
+
 		if (grade == 1) {
 			monthlySalary = 3000000;
 			if (isForeigner) {
@@ -65,19 +65,19 @@ public class Employee extends Data {
 		} else if (grade == 2) {
 			monthlySalary = 5000000;
 			if (isForeigner) {
-				monthlySalary = (int) (3000000 * 1.5);
+				monthlySalary = (int) (5000000 * 1.5);
 			}
 		} else if (grade == 3) {
 			monthlySalary = 7000000;
 			if (isForeigner) {
-				monthlySalary = (int) (3000000 * 1.5);
+				monthlySalary = (int) (7000000 * 1.5);
 			}
 		}
 	}
 
 	public void setSpouse(String spouseName, String spouseIdNumber) {
 		this.spouseName = spouseName;
-		this.spouseIdNumber = idNumber;
+		this.spouseIdNumber = pribadiemployee.getIdNumber();
 	}
 
 	public void addChild(String childName, String childIdNumber) {
@@ -85,19 +85,20 @@ public class Employee extends Data {
 		childIdNumbers.add(childIdNumber);
 	}
 
-	public int getAnnualIncomeTax() {
+	public int getAnnualIncomeTax(int monthWorkingInYear) {
 
 		// Menghitung berapa lama pegawai bekerja dalam setahun ini, jika pegawai sudah
 		// bekerja dari tahun sebelumnya maka otomatis dianggap 12 bulan.
 		LocalDate date = LocalDate.now();
 
-		if (date.getYear() == yearJoined) {
-			monthWorkingInYear = date.getMonthValue() - monthJoined;
+		if (date.getYear() == employee.getYearJoined()) {
+			monthWorkingInYear = date.getMonthValue() - employee.getMonthJoined();
 		} else {
 			monthWorkingInYear = 12;
 		}
 
-		return TaxFunction.calculateTax(monthlySalary, otherMonthlyIncome, monthWorkingInYear, annualDeductible,
+		return TaxFunction.calculateTax(karyawaan.getMonthlySalary(), karyawaan.getOtherMonthlyIncome(),
+				employee.getMonthWorkingInYear(), karyawaan.getAnnualDeductible(),
 				spouseIdNumber.equals(""), childIdNumbers.size());
 	}
 

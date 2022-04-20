@@ -1,6 +1,6 @@
 package lib;
 
-public class Data {
+public class Data extends Tanggalmasuk {
     private String employeeId;
     private String firstName;
     private String lastName;
