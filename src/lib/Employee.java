@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Employee extends Data {
 
-	private Da pribadiemployee;
+	private Data pribadiemployee;
 
 	private Tanggalmasuk employee;
 
