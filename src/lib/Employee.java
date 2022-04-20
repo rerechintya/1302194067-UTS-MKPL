@@ -22,21 +22,31 @@ public class Employee extends Data {
 	private List<String> childNames;
 	private List<String> childIdNumbers;
 
-	public Employee(String employeeId, String firstName, String lastName, String idNumber, String address,
-			int yearJoined, int monthJoined, int dayJoined, boolean isForeigner, boolean gender) {
-		this.employeeId = employeeId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.idNumber = idNumber;
-		this.address = address;
-		this.yearJoined = yearJoined;
-		this.monthJoined = monthJoined;
-		this.dayJoined = dayJoined;
+	public Employee(Data pribadiemployee,
+			Tanggalmasuk employee, boolean isForeigner, boolean gender) {
+		this.setPribadiemployee(pribadiemployee);
+		this.setEmployee(employee);
 		this.isForeigner = isForeigner;
 		this.gender = gender;
 
 		childNames = new LinkedList<String>();
 		childIdNumbers = new LinkedList<String>();
+	}
+
+	public Data getPribadiemployee() {
+		return pribadiemployee;
+	}
+
+	public void setPribadiemployee(Data pribadiemployee) {
+		this.pribadiemployee = pribadiemployee;
+	}
+
+	public Tanggalmasuk getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Tanggalmasuk employee) {
+		this.employee = employee;
 	}
 
 	/**
@@ -45,7 +55,6 @@ public class Employee extends Data {
 	 * 7.000.000 per bulan)
 	 * Jika pegawai adalah warga negara asing gaji bulanan diperbesar sebanyak 50%
 	 */
-
 	public void setMonthlySalary(int grade) {
 		if (grade == 1) {
 			monthlySalary = 3000000;
@@ -90,4 +99,5 @@ public class Employee extends Data {
 		return TaxFunction.calculateTax(monthlySalary, otherMonthlyIncome, monthWorkingInYear, annualDeductible,
 				spouseIdNumber.equals(""), childIdNumbers.size());
 	}
+
 }
