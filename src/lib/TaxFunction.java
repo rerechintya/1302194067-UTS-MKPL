@@ -31,7 +31,14 @@ public class TaxFunction {
 		if (numberOfChildren > 3) {
 			numberOfChildren = 3;
 		}
+		return printinfo(monthlySalary, otherMonthlyIncome, numberOfMonthWorking, deductible, isMarried,
+				numberOfChildren);
 
+	}
+
+	private static int printinfo(int monthlySalary, int otherMonthlyIncome, int numberOfMonthWorking, int deductible,
+			boolean isMarried, int numberOfChildren) {
+		int tax = 0;
 		if (isMarried) {
 			tax = (int) Math.round(0.05 * (((monthlySalary + otherMonthlyIncome) * numberOfMonthWorking) - deductible
 					- (54000000 + 4500000 + (numberOfChildren * 1500000))));
@@ -45,7 +52,6 @@ public class TaxFunction {
 		} else {
 			return tax;
 		}
-
 	}
 
 }
