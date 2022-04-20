@@ -1,7 +1,7 @@
 package lib;
 
 public class TaxFunction {
-	private final int  = 5 / 100;
+	private final int pajak = 5 / 100;
 	private final int single = 54000000;
 	private final int married = 4500000;
 	private final int kids = 3;
