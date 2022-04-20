@@ -4,12 +4,13 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Date;
 
 public class Employee extends Data {
 
 	private Data pribadiemployee;
 
-	private Tanggalmasuk employee;
+	private Date Tanggalmasuk;
 
 	private boolean isForeigner;
 	private boolean gender; // true = Laki-laki, false = Perempuan
@@ -23,14 +24,22 @@ public class Employee extends Data {
 	private List<String> childIdNumbers;
 
 	public Employee(Data pribadiemployee,
-			Tanggalmasuk employee, boolean isForeigner, boolean gender) {
+			Date Tanggalmasuk, boolean isForeigner, boolean gender) {
 		this.setPribadiemployee(pribadiemployee);
-		this.setEmployee(employee);
+		this.setTanggalmasuk(Tanggalmasuk);
 		this.isForeigner = isForeigner;
 		this.gender = gender;
 
 		childNames = new LinkedList<String>();
 		childIdNumbers = new LinkedList<String>();
+	}
+
+	public Date getTanggalmasuk() {
+		return Tanggalmasuk;
+	}
+
+	public void setTanggalmasuk(Date tanggalmasuk) {
+		Tanggalmasuk = tanggalmasuk;
 	}
 
 	public Data getPribadiemployee() {
@@ -39,14 +48,6 @@ public class Employee extends Data {
 
 	public void setPribadiemployee(Data pribadiemployee) {
 		this.pribadiemployee = pribadiemployee;
-	}
-
-	public Tanggalmasuk getEmployee() {
-		return employee;
-	}
-
-	public void setEmployee(Tanggalmasuk employee) {
-		this.employee = employee;
 	}
 
 	/**
